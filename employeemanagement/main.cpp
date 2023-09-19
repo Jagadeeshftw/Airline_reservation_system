@@ -8,10 +8,6 @@
 
 #include<windows.h>
 
-//#include <ctime>
-
-//#include <dos.h>
-
 #include<dos.h>
 
 #include<conio.h>
