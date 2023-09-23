@@ -1,9 +1,10 @@
 
-#include<iostream>
+#include <iostream>
 #include <cstdio>
 #include <iostream>
 #include <string.h>
 #include <cstdlib>
+#include <iomanip>
 
 using namespace std;
 
@@ -16,7 +17,6 @@ class a
   char busn[5], driver[10], arrival[5], depart[5], from[10], to[10], seat[8][4][10];
 
 public:
-
   void install();
 
   void allotment();
@@ -37,44 +37,42 @@ void vline(char ch)
 
 {
 
-  for (int i=80;i>0;i--)
+  for (int i = 80; i > 0; i--)
 
-  cout<<ch;
-
+    cout << ch;
 }
 
 void a::install()
 
 {
-cout<<"Enter the following details"<<endl;
-  cout<<"Enter bus no: ";
+  cout << "Enter the following details" << endl;
+  cout << "Enter bus no: ";
 
-  cin>>bus[p].busn;
+  cin >> bus[p].busn;
 
-  cout<<"\nEnter Driver's name: ";
+  cout << "\nEnter Driver's name: ";
 
-  cin>>bus[p].driver;
+  cin >> bus[p].driver;
 
-  cout<<"\nArrival time: ";
+  cout << "\nArrival time: ";
 
-  cin>>bus[p].arrival;
+  cin >> bus[p].arrival;
 
-  cout<<"\nDeparture: ";
+  cout << "\nDeparture: ";
 
-  cin>>bus[p].depart;
+  cin >> bus[p].depart;
 
-  cout<<"\nFrom: \t\t\t";
+  cout << "\nFrom: \t\t\t";
 
-  cin>>bus[p].from;
+  cin >> bus[p].from;
 
-  cout<<"\nTo: \t\t\t";
+  cout << "\nTo: \t\t\t";
 
-  cin>>bus[p].to;
+  cin >> bus[p].to;
 
   bus[p].empty();
 
   p++;
-
 }
 
 void a::allotment()
@@ -85,95 +83,84 @@ void a::allotment()
 
   char number[5];
 
-  top:
+top:
 
-  cout<<"Bus no: ";
+  cout << "Bus no: ";
 
-  cin>>number;
+  cin >> number;
 
   int n;
 
-  for(n=0;n<=p;n++)
+  for (n = 0; n <= p; n++)
 
   {
 
-    if(strcmp(bus[n].busn, number)==0)
+    if (strcmp(bus[n].busn, number) == 0)
 
-    break;
-
+      break;
   }
 
-  while(n<=p)
+  while (n <= p)
 
   {
 
-    cout<<"\nSeat Number: ";
+    cout << "\nSeat Number: ";
 
-    cin>>seat;
+    cin >> seat;
 
-    if(seat>32)
+    if (seat > 32)
 
     {
 
-      cout<<"\nThere are only 32 seats available in this bus.";
-
+      cout << "\nThere are only 32 seats available in this bus.";
     }
 
     else
 
     {
 
-    if (strcmp(bus[n].seat[seat/4][(seat%4)-1], "Empty")==0)
+      if (strcmp(bus[n].seat[seat / 4][(seat % 4) - 1], "Empty") == 0)
 
       {
 
-        cout<<"Enter passanger's name: ";
+        cout << "Enter passanger's name: ";
 
-        cin>>bus[n].seat[seat/4][(seat%4)-1];
+        cin >> bus[n].seat[seat / 4][(seat % 4) - 1];
 
         break;
-
       }
 
-    else
+      else
 
-      cout<<"The seat no. is already reserved.\n";
-
-      }
-
-      }
-
-    if(n>p)
-
-    {
-
-      cout<<"Enter correct bus no.\n";
-
-      goto top;
-
+        cout << "The seat no. is already reserved.\n";
     }
-
   }
 
+  if (n > p)
+
+  {
+
+    cout << "Enter correct bus no.\n";
+
+    goto top;
+  }
+}
 
 void a::empty()
 
 {
 
-  for(int i=0; i<8;i++)
+  for (int i = 0; i < 8; i++)
 
   {
 
-    for(int j=0;j<4;j++)
+    for (int j = 0; j < 4; j++)
 
     {
 
       strcpy(bus[p].seat[i][j], "Empty");
-
     }
-
   }
-
 }
 
 void a::show()
@@ -184,222 +171,253 @@ void a::show()
 
   char number[5];
 
-  cout<<"Enter bus no: ";
+  cout << "Enter bus no: ";
 
-  cin>>number;
+  cin >> number;
 
-  for(n=0;n<=p;n++)
+  for (n = 0; n <= p; n++)
 
   {
 
-    if(strcmp(bus[n].busn, number)==0)
+    if (strcmp(bus[n].busn, number) == 0)
 
-    break;
-
+      break;
   }
 
-while(n<=p)
-
-{
-
-  vline('*');
-
-  cout<<"Bus no: \t"<<bus[n].busn
-
-  <<"\nDriver: \t"<<bus[n].driver<<"\t\tArrival time: \t"
-
-  <<bus[n].arrival<<"\tDeparture time:"<<bus[n].depart
-
-  <<"\nFrom: \t\t"<<bus[n].from<<"\t\tTo: \t\t"<<
-
-  bus[n].to<<"\n";
-
-  vline('*');
-
-  bus[0].position(n);
-
-  int a=1;
-
-  for (int i=0; i<8; i++)
+  while (n <= p)
 
   {
 
-    for(int j=0;j<4;j++)
+    vline('*');
+
+    cout << "Bus no: \t" << bus[n].busn
+
+         << "\nDriver: \t" << bus[n].driver << "\t\tArrival time: \t"
+
+         << bus[n].arrival << "\tDeparture time:" << bus[n].depart
+
+         << "\nFrom: \t\t" << bus[n].from << "\t\tTo: \t\t" <<
+
+        bus[n].to << "\n";
+
+    vline('*');
+
+    bus[0].position(n);
+
+    int a = 1;
+
+    for (int i = 0; i < 8; i++)
 
     {
 
-      a++;
+      for (int j = 0; j < 4; j++)
 
-      if(strcmp(bus[n].seat[i][j],"Empty")!=0)
+      {
 
-      cout<<"\nThe seat no "<<(a-1)<<" is reserved for "<<bus[n].seat[i][j]<<".";
+        a++;
 
+        if (strcmp(bus[n].seat[i][j], "Empty") != 0)
+
+          cout << "\nThe seat no " << (a - 1) << " is reserved for " << bus[n].seat[i][j] << ".";
+      }
     }
 
+    break;
   }
 
-  break;
+  if (n > p)
 
-  }
-
-  if(n>p)
-
-    cout<<"Enter correct bus no: ";
-
+    cout << "Enter correct bus no: ";
 }
 
 void a::position(int l)
 
 {
 
-  int s=0;p=0;
+  int s = 0;
+  p = 0;
 
-  for (int i =0; i<8;i++)
+  for (int i = 0; i < 8; i++)
 
   {
 
-    cout<<"\n";
+    cout << "\n";
 
-    for (int j = 0;j<4; j++)
+    for (int j = 0; j < 4; j++)
 
     {
 
       s++;
 
-      if(strcmp(bus[l].seat[i][j], "Empty")==0)
+      if (strcmp(bus[l].seat[i][j], "Empty") == 0)
 
-        {
-
-          cout.width(5);
-
-          cout.fill(' ');
-
-          cout<<s<<".";
-
-          cout.width(10);
-
-          cout.fill(' ');
-
-          cout<<bus[l].seat[i][j];
-
-          p++;
-
-        }
-
-        else
-
-        {
+      {
 
         cout.width(5);
 
         cout.fill(' ');
 
-        cout<<s<<".";
+        cout << s << ".";
 
         cout.width(10);
 
         cout.fill(' ');
 
-        cout<<bus[l].seat[i][j];
+        cout << bus[l].seat[i][j];
 
-        }
-
+        p++;
       }
 
+      else
+
+      {
+
+        cout.width(5);
+
+        cout.fill(' ');
+
+        cout << s << ".";
+
+        cout.width(10);
+
+        cout.fill(' ');
+
+        cout << bus[l].seat[i][j];
+      }
     }
-
-  cout<<"\n\nThere are "<<p<<" seats empty in Bus No: "<<bus[l].busn;
-
   }
+
+  cout << "\n\nThere are " << p << " seats empty in Bus No: " << bus[l].busn;
+}
 
 void a::avail()
 
 {
 
-
-  for(int n=0;n<p;n++)
+  for (int n = 0; n < p; n++)
 
   {
 
     vline('*');
 
-    cout<<"Bus no: \t"<<bus[n].busn<<"\nDriver: \t"<<bus[n].driver
+    cout << "Bus no: \t" << bus[n].busn << "\nDriver: \t" << bus[n].driver
 
-    <<"\t\tArrival time: \t"<<bus[n].arrival<<"\tDeparture Time: \t"
+         << "\t\tArrival time: \t" << bus[n].arrival << "\tDeparture Time: \t"
 
-    <<bus[n].depart<<"\nFrom: \t\t"<<bus[n].from<<"\t\tTo: \t\t\t"
+         << bus[n].depart << "\nFrom: \t\t" << bus[n].from << "\t\tTo: \t\t\t"
 
-    <<bus[n].to<<"\n";
+         << bus[n].to << "\n";
 
     vline('*');
 
     vline('_');
-
   }
-
 }
 
+// Function to clear the console screen (platform-independent)
+void clearScreen()
+{
+  cout << "\033[H\033[2J"; // ANSI escape code to clear screen (Unix-like)
+}
+
+// Function to print a stylish centered text line with custom borders
+void printStyledText(const string &text, char borderChar)
+{
+  int width = 80; // Assuming console width is 80 columns
+  int textWidth = text.length();
+  int leftMargin = (width - textWidth - 4) / 2; // 2 characters for left border, 2 for right border
+
+  cout << "\t\t\t\t\t";
+  cout << string(width, borderChar) << endl;
+
+  cout << "\t\t\t\t\t" << borderChar << borderChar;
+  cout << setw(leftMargin) << "" << text << setw(leftMargin) << "";
+  cout << borderChar << borderChar << endl;
+
+  cout << "\t\t\t\t\t";
+  cout << string(width, borderChar) << endl
+       << endl;
+}
+
+void welcome()
+{
+
+  clearScreen();
+
+  // Customize the UI by changing text and border characters
+  cout << "\n\n\n\n";
+  cout << "\033[32m";
+  printStyledText("WELCOME TO", '*');
+  printStyledText("BUS RESERVATION SYSTEM MANAGEMENT", '#');
+  printStyledText("PROJECT", '+');
+
+  cout << "\t\t\t\t\t--------------------------------------------------------------------------------\n";
+  cout << "\t\t\t\t\t\t\t\t\t  Developed By:-                             \t\n";
+  cout << "\t\t\t\t\t\t\t\t\t                                            \t\n";
+  cout << "\t\t\t\t\t\t\t\t\t  Jagadeesh B                            \t\n";
+  cout << "\t\t\t\t\t--------------------------------------------------------------------------------\n\n";
+}
 int main()
 
 {
-  ios_base::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
-  //Above 3 lines will fast the Input and output processes
 
-system("cls");
+  system("cls");
 
-int w;
+  int selection;
 
-while(1)
+  welcome(); // welcome page
 
-{
+  // system("pause");
 
-    //system("cls");
+  cout << "\n\n\n\n";
 
-  cout<<"\n\n\n\n\n";
-
-  cout<<"\t\t\t1.Install\n\t\t\t"
-
-  <<"2.Reservation\n\t\t\t"
-
-  <<"3.Show\n\t\t\t"
-
-  <<"4.Buses Available. \n\t\t\t"
-
-  <<"5.Exit";
-
-  cout<<"\n\t\t\tEnter your choice:-> ";
-
-  cin>>w;
-
-  switch(w)
-
+  while (1)
   {
 
-    case 1:  bus[p].install();
+    system("cls");
+
+    cout << "\t\t\t1.Install\n\t\t\t"
+
+         << "2.Reservation\n\t\t\t"
+
+         << "3.Show\n\t\t\t"
+
+         << "4.Buses Available. \n\t\t\t"
+
+         << "5.Exit";
+
+    cout << "\n\t\t\tEnter your choice:-> ";
+
+    cin >> selection;
+
+    switch (selection)
+
+    {
+
+    case 1:
+      bus[p].install();
 
       break;
 
-    case 2:  bus[p].allotment();
+    case 2:
+      bus[p].allotment();
 
       break;
 
-    case 3:  bus[0].show();
+    case 3:
+      bus[0].show();
 
       break;
 
-    case 4:  bus[0].avail();
+    case 4:
+      bus[0].avail();
 
       break;
 
-    case 5:  exit(0);
-
+    case 5:
+      exit(0);
+    }
   }
 
+  return 0;
 }
-
-return 0;
-
-}
-
