@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/JagadeeshB/practice/Airline_reservation_system/airReservation",
-      "program": "c:/Users/JagadeeshB/practice/Airline_reservation_system/airReservation/build/Debug/outDebug",
+      "cwd": "c:/Users/JagadeeshB/practice/Airline_reservation_system",
+      "program": "c:/Users/JagadeeshB/practice/Airline_reservation_system/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
